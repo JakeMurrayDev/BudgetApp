@@ -1,16 +1,17 @@
-﻿if(ChildContent != null)
+﻿@inherits CommonBase
+@if (ChildContent != null)
 {
-<button type="button"
+    <button type="button"
         class="btn btn-outline-secondary"
         data-bs-dismiss="modal"
         @onclick="Parent.Close"
         @attributes="AdditionalAttributes">
-    @ChildContent
-</button>
+        @ChildContent
+    </button>
 }
 else
 {
-<button type="button"
+    <button type="button"
         class="btn-close"
         data-bs-dismiss="modal"
         aria-label="Close"

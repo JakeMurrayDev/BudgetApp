@@ -1,21 +1,15 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BudgetApp.Client.Base;
+using Microsoft.AspNetCore.Components;
 
 namespace BudgetApp.Client.Components
 {
-    public partial class Modal : ComponentBase
+    public partial class Modal : CommonBase
     {
         [Parameter]
-        public RenderFragment? ChildContent { get; set; }
-        [Parameter(CaptureUnmatchedValues = true)]
-        public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
-        [Parameter]
-        public RenderFragment? Header { get; set; }
-        [Parameter]
-        public RenderFragment? Body { get; set; }
-        [Parameter]
-        public RenderFragment? Footer { get; set; }
+        public bool Centered { get; set; }
 
         bool _isDisplayed;
+
         public void Show()
         {
             _isDisplayed = true;
@@ -23,6 +17,15 @@ namespace BudgetApp.Client.Components
         public void Close()
         {
             _isDisplayed = false;
+        }
+
+        private string? GetModalCenterClass()
+        {
+            if (Centered)
+            {
+                return "modal-dialog-centered";
+            }
+            return null;
         }
     }
 }
