@@ -8,6 +8,8 @@ namespace BudgetApp.Client.Base
         public RenderFragment? ChildContent { get; set; }
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+        [Parameter]
+        public string? Class { get; set; }
 
         protected virtual void CheckParentIfNull<TParent, TChild>(TParent parent, TChild child)
         {
