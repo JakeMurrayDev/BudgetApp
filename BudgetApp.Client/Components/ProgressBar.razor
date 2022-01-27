@@ -1,0 +1,24 @@
+﻿@inherits CommonBase
+
+@if (Parent != null)
+{
+    <div class="progress-bar @Class"
+     role="progressbar"
+     aria-valuenow="@Value"
+     aria-valuemin="@Min"
+     aria-valuemax="@Max"
+     style="width: @Percentage%;"
+     @attributes="AdditionalAttributes"></div>
+}
+else
+{
+    <div class="progress">
+        <div class="progress-bar @Class"
+         role="progressbar"
+         aria-valuenow="@Value"
+         aria-valuemin="@Min"
+         aria-valuemax="@Max"
+         style="width: @Percentage%;"
+         @attributes="AdditionalAttributes"></div>
+    </div>
+}
