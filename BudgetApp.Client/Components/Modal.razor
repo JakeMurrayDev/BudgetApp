@@ -1,0 +1,31 @@
+﻿@if (_isDisplayed)
+{
+    <div class="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                @if (Header != null)
+                {
+                    <div class="modal-header">
+                        @Header
+                    </div>
+                }
+                <div class="modal-body">
+                    if(Body != null)
+                    {
+                    @Body
+                    }
+                    else
+                    {
+                    @ChildContent
+                    }
+                </div>
+                @if (Footer != null)
+                {
+                    <div class="modal-footer">
+                        @Footer
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,19 @@
+﻿if(ChildContent != null)
+{
+<button type="button"
+        class="btn btn-outline-secondary"
+        data-bs-dismiss="modal"
+        @onclick="Parent.Close"
+        @attributes="AdditionalAttributes">
+    @ChildContent
+</button>
+}
+else
+{
+<button type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+        @onclick="Parent.Close"
+        @attributes="AdditionalAttributes"></button>
+}
