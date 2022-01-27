@@ -1,1 +1,17 @@
-﻿
+﻿<Card>
+    <CardBody>
+        <CardTitle Class="d-flex justify-content-between align-items-baseline fw-normal mb-3">
+            <div class="me-2">@Name</div>
+            <div class="d-flex align-items-baseline">
+                @Amount.ToString("C2")
+                <span class="text-muted fs-6 ms-1">
+                    / @Max.ToString("C2")
+                </span>
+            </div>
+        </CardTitle>
+        <ProgressBar Class="@($"rounded-pill {Variant}")"
+                     Min="0"
+                     Max="Max"
+                     Value="Amount" />
+    </CardBody>
+</Card>
