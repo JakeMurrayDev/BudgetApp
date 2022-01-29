@@ -42,7 +42,7 @@ namespace BudgetApp.Client.ViewModels
             RuleFor(x => x.Id).NotEmpty();
             RuleFor(x => x.Name).NotEmpty();
             RuleFor(x => x.Max).NotEmpty()
-                .WithMessage("Max must not be and must be greater than zero.");
+                .WithMessage("Max must not be empty and must be greater than zero.");
         }
     }
 }
