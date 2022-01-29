@@ -35,7 +35,7 @@ namespace BudgetApp.Client.ViewModels
         }
     }
 
-    public class BudgetValidator : AbstractValidator<IBudgetViewModel>
+    public class BudgetValidator : AbstractValidator<BudgetViewModel>
     {
         public BudgetValidator()
         {

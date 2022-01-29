@@ -13,6 +13,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 //ViewModels
 builder.Services.AddScoped<IBudgetsPageViewModel, BudgetsPageViewModel>();
 //Validation
-builder.Services.AddTransient<IValidator<IBudgetViewModel>, BudgetValidator>();
-builder.Services.AddTransient<IValidator<IExpenseViewModel>, ExpenseValidator>();
+builder.Services.AddTransient<IValidator<BudgetViewModel>, BudgetValidator>();
+builder.Services.AddTransient<IValidator<ExpenseViewModel>, ExpenseValidator>();
 await builder.Build().RunAsync();
