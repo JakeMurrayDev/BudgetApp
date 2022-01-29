@@ -13,6 +13,8 @@ namespace BudgetApp.Client.Shared
         [Parameter]
         public bool IsGray { get; set; }
         [Parameter]
+        public bool IsHideButtons { get; set; }
+        [Parameter]
         public Func<Task>? OnAddExpenseClick { get; set; }
         [Parameter]
         public Func<Task>? OnViewExpensesClick { get; set; }
@@ -35,12 +37,11 @@ namespace BudgetApp.Client.Shared
         {
             get
             {
-                if (Amount > Max)
+                if (IsGray)
                 {
-                    return "bg-danger bg-opacity-10";
+                    return "bg-light";
                 }
-
-                return IsGray ? "bg-light" : null;
+                return Amount > Max ? "bg-danger bg-opacity-10" : null;
             }
         }
 

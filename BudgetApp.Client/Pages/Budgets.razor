@@ -26,6 +26,14 @@
                             Max="@budget.Max"
                             OnAddExpenseClick="async () => await _addExpenseModal.Show(budget.Id)" />
             }
+            <BudgetCard Name="Uncategorized"
+                        Amount="@BudgetsPageViewModel.GetBudgetExpensesAmount(Guid.Empty)"
+                        IsGray="true"
+                        OnAddExpenseClick="async () => await _addExpenseModal.Show(Guid.Empty)" />
+            <BudgetCard Name="Total"
+                        Amount="@BudgetsPageViewModel.GetBudgetExpensesAmount()"
+                        Max="@BudgetsPageViewModel.GetBudgetsMax()"
+                        IsHideButtons="true" />
         </div>
     </div>
     <AddBudgetModal @ref="_addBudgetModal" />

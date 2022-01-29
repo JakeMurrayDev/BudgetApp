@@ -8,7 +8,8 @@ namespace BudgetApp.Client.ViewModels
         List<IBudgetViewModel> Budgets { get; set; }
         List<IExpenseViewModel> Expenses { get; set; }
         Task Initialize();
-        double GetBudgetExpensesAmount(Guid budgetId);
+        double GetBudgetExpensesAmount(Guid? budgetId = null);
+        double GetBudgetsMax();
         Task AddBudget(IBudgetViewModel budget);
         Task AddExpense(IExpenseViewModel expense);
         Task DeleteBudget(IBudgetViewModel budget);
@@ -54,10 +55,19 @@ namespace BudgetApp.Client.ViewModels
                 ?? new();
         }
 
-        public double GetBudgetExpensesAmount(Guid budgetId)
+        public double GetBudgetExpensesAmount(Guid? budgetId = null)
         {
+            if (budgetId == null)
+            {
+                return _expenses.Sum(x => x.Amount);
+            }
             return _expenses.Where(x => x.BudgetId == budgetId)
                 .Sum(x => x.Amount);
+        }
+
+        public double GetBudgetsMax()
+        {
+            return _budgets.Sum(x => x.Max);
         }
 
         public async Task AddBudget(IBudgetViewModel budget)

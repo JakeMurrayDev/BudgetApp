@@ -5,25 +5,34 @@
             <div class="me-2">@Name</div>
             <div class="d-flex align-items-baseline">
                 @Amount.ToString("C2")
-                <span class="text-muted fs-6 ms-1">
-                    / @Max.ToString("C2")
-                </span>
+                @if (Max > 0)
+                {
+                    <span class="text-muted fs-6 ms-1">
+                        / @Max.ToString("C2")
+                    </span>
+                }
             </div>
         </CardTitle>
-        <ProgressBar Class="@($"rounded-pill {Variant}")"
-                     Min="0"
-                     Max="Max"
-                     Value="Amount" />
-        <div class="hstack gap-2 mt-4">
-            <Button Variant="ButtonVariant.OutlinePrimary"
-                    Class="ms-auto"
-                    @onclick="AddExpense">
-                Add Expense
-            </Button>
-            <Button Variant="ButtonVariant.OutlineSecondary"
-                    @onclick="ViewExpenses">
-                View Expenses
-            </Button>
-        </div>
+        @if (Max > 0)
+        {
+            <ProgressBar Class="@($"rounded-pill {Variant}")"
+                         Min="0"
+                         Max="Max"
+                         Value="Amount" />
+        }
+        @if (!IsHideButtons)
+        {
+            <div class="hstack gap-2 mt-4">
+                <Button Variant="ButtonVariant.OutlinePrimary"
+                        Class="ms-auto"
+                        @onclick="AddExpense">
+                    Add Expense
+                </Button>
+                <Button Variant="ButtonVariant.OutlineSecondary"
+                        @onclick="ViewExpenses">
+                    View Expenses
+                </Button>
+            </div>
+        }
     </CardBody>
 </Card>

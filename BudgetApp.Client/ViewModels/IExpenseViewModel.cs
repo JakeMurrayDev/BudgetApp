@@ -48,8 +48,8 @@ namespace BudgetApp.Client.ViewModels
         public ExpenseValidator()
         {
             //RuleFor(x => x.Id).NotEmpty();
-            RuleFor(x => x.BudgetId).NotEmpty()
-                .WithMessage("Please select a budget.");
+            //RuleFor(x => x.BudgetId).NotEmpty()
+            //    .WithMessage("Please select a budget.");
             RuleFor(x => x.Description).NotEmpty();
             RuleFor(x => x.Amount).NotEmpty()
                 .WithMessage("Amount must not be empty and must be greater than zero.");
