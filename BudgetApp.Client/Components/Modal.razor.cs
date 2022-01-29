@@ -7,16 +7,25 @@ namespace BudgetApp.Client.Components
     {
         [Parameter]
         public bool Centered { get; set; }
+        [Parameter]
+        public Func<Task>? OnClose { get; set; }
 
         bool _isDisplayed;
 
-        public void Show()
+        public Task Show()
         {
             _isDisplayed = true;
+            StateHasChanged();
+            return Task.CompletedTask;
         }
-        public void Close()
+        public async Task Close()
         {
+            if (OnClose != null)
+            {
+                await OnClose.Invoke();
+            }
             _isDisplayed = false;
+            StateHasChanged();
         }
 
         private string? GetModalCenterClass()
