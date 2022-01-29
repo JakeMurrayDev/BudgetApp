@@ -39,7 +39,7 @@ namespace BudgetApp.Client.ViewModels
     {
         public BudgetValidator()
         {
-            RuleFor(x => x.Id).NotEmpty();
+            //RuleFor(x => x.Id).NotEmpty();
             RuleFor(x => x.Name).NotEmpty();
             RuleFor(x => x.Max).NotEmpty()
                 .WithMessage("Max must not be empty and must be greater than zero.");

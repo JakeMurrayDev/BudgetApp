@@ -47,7 +47,7 @@ namespace BudgetApp.Client.ViewModels
     {
         public ExpenseValidator()
         {
-            RuleFor(x => x.Id).NotEmpty();
+            //RuleFor(x => x.Id).NotEmpty();
             RuleFor(x => x.BudgetId).NotEmpty();
             RuleFor(x => x.Description).NotEmpty();
             RuleFor(x => x.Amount).NotEmpty();
