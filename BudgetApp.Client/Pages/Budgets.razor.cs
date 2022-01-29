@@ -11,6 +11,7 @@ namespace BudgetApp.Client.Pages
         public IBudgetsPageViewModel BudgetsPageViewModel { get; set; }
 
         private AddBudgetModal _addBudgetModal;
+        private AddExpenseModal _addExpenseModal;
         private PropertyChangedEventHandler _budgetsPagePropertyChangedEventHandler;
 
         protected override async Task OnInitializedAsync()

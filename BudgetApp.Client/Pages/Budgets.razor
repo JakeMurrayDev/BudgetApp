@@ -6,8 +6,14 @@
     <div class="container">
         <div class="hstack gap-2 mb-4">
             <h1 class="me-auto">Budgets</h1>
-            <Button @onclick="() => _addBudgetModal.Show()">Add Budget</Button>
-            <Button Variant="ButtonVariant.OutlinePrimary">Add Expense</Button>
+            <Button Variant="ButtonVariant.Primary"
+                    @onclick="() => _addBudgetModal.Show()">
+                Add Budget
+            </Button>
+            <Button Variant="ButtonVariant.OutlinePrimary"
+                    @onclick="() => _addExpenseModal.Show()">
+                Add Expense
+            </Button>
         </div>
         <div style="display: grid;
                     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -22,4 +28,5 @@
         </div>
     </div>
     <AddBudgetModal @ref="_addBudgetModal" />
+    <AddExpenseModal @ref="_addExpenseModal" />
 </CascadingValue>

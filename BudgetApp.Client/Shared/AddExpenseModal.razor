@@ -1,5 +1,39 @@
-﻿<h3>AddExpenseModal</h3>
-
-@code {
-
-}
+﻿<Modal @ref="_modal">
+    <ModalHeader>
+        <ModalTitle>New Expense</ModalTitle>
+        <ModalClose />
+    </ModalHeader>
+    <EditForm Model="_expense" OnValidSubmit="AddExpense">
+        <FluentValidationValidator DisableAssemblyScanning="true" />
+        <ModalBody>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <InputText class="form-control"
+                           @bind-Value="_expense.Description" />
+                <ValidationMessage For="@(() => _expense.Description)" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Amount</label>
+                <InputNumber class="form-control"
+                             min="0"
+                             @bind-Value="_expense.Amount" />
+                <ValidationMessage For="@(() => _expense.Amount)" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Budget</label>
+                <InputSelect class="form-select"
+                             @bind-Value="_expense.BudgetId">
+                    <option value="@Guid.Empty">--Select Budget--</option>
+                    @foreach (var budget in BudgetsPageViewModel.Budgets)
+                    {
+                        <option value="@budget.Id">@budget.Name</option>
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => _expense.BudgetId)" />
+            </div>
+        </ModalBody>
+        <ModalFooter>
+            <Button type="submit">Add</Button>
+        </ModalFooter>
+    </EditForm>
+</Modal>

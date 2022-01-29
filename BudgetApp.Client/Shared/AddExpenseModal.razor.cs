@@ -5,21 +5,21 @@ using Microsoft.AspNetCore.Components;
 
 namespace BudgetApp.Client.Shared
 {
-    public partial class AddBudgetModal : ComponentBase, IDisposable
+    public partial class AddExpenseModal : ComponentBase, IDisposable
     {
         [CascadingParameter]
         public IBudgetsPageViewModel BudgetsPageViewModel { get; set; }
 
         private Modal _modal;
         private PropertyChangedEventHandler _eventHandler;
-        private IBudgetViewModel _budget;
+        private IExpenseViewModel _expense;
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            _budget = new BudgetViewModel();
+            _expense = new ExpenseViewModel();
             _eventHandler = (s, e) => StateHasChanged();
-            _budget.PropertyChanged += _eventHandler;
+            _expense.PropertyChanged += _eventHandler;
         }
 
         public void Show()
@@ -27,17 +27,17 @@ namespace BudgetApp.Client.Shared
             _modal.Show();
         }
 
-        private void AddBudget()
+        private void AddExpense()
         {
-            _budget.Id = Guid.NewGuid();
-            BudgetsPageViewModel.AddBudget(_budget);
-            _budget = new BudgetViewModel();
+            _expense.Id = Guid.NewGuid();
+            BudgetsPageViewModel.AddExpense(_expense);
+            _expense = new ExpenseViewModel();
             _modal.Close();
         }
 
         public void Dispose()
         {
-            _budget.PropertyChanged -= _eventHandler;
+            _expense.PropertyChanged -= _eventHandler;
         }
     }
 }
