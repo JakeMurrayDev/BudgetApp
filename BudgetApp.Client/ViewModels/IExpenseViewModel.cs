@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using FluentValidation;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace BudgetApp.Client.ViewModels
 {
@@ -40,5 +41,16 @@ namespace BudgetApp.Client.ViewModels
             set => SetProperty(ref _amount, value, nameof(Amount));
         }
 
+    }
+
+    public class ExpenseValidator : AbstractValidator<IExpenseViewModel>
+    {
+        public ExpenseValidator()
+        {
+            RuleFor(x => x.Id).NotEmpty();
+            RuleFor(x => x.BudgetId).NotEmpty();
+            RuleFor(x => x.Description).NotEmpty();
+            RuleFor(x => x.Amount).NotEmpty();
+        }
     }
 }

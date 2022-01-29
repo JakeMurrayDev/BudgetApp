@@ -7,11 +7,12 @@ namespace BudgetApp.Client.ViewModels
     {
         List<IBudgetViewModel> Budgets { get; set; }
         List<IExpenseViewModel> Expenses { get; set; }
+        Task Initialize();
         double GetBudgetExpensesAmount(Guid budgetId);
-        void AddBudget(IBudgetViewModel budget);
-        void AddExpense(IExpenseViewModel expense);
-        void DeleteBudget(IBudgetViewModel budget);
-        void DeleteExpense(IExpenseViewModel expense);
+        Task AddBudget(IBudgetViewModel budget);
+        Task AddExpense(IExpenseViewModel expense);
+        Task DeleteBudget(IBudgetViewModel budget);
+        Task DeleteExpense(IExpenseViewModel expense);
     }
 
     public class BudgetsPageViewModel : ObservableObject, IBudgetsPageViewModel
@@ -37,6 +38,20 @@ namespace BudgetApp.Client.ViewModels
         public BudgetsPageViewModel(ILocalStorageService localStorage)
         {
             _localStorage = localStorage;
+            _budgets = new();
+            _expenses = new();
+        }
+
+        public async Task Initialize()
+        {
+            _budgets = (await _localStorage.GetItemAsync<List<BudgetViewModel>>("budgets"))?
+                .Cast<IBudgetViewModel>()
+                .ToList()
+                ?? new();
+            _expenses = (await _localStorage.GetItemAsync<List<ExpenseViewModel>>("expenses"))?
+                .Cast<IExpenseViewModel>()
+                .ToList()
+                ?? new();
         }
 
         public double GetBudgetExpensesAmount(Guid budgetId)
@@ -45,28 +60,40 @@ namespace BudgetApp.Client.ViewModels
                 .Sum(x => x.Amount);
         }
 
-        public void AddBudget(IBudgetViewModel budget)
+        public async Task AddBudget(IBudgetViewModel budget)
         {
             _budgets.Add(budget);
-            OnPropertyChanged(nameof(Budgets));
+            await UpdateBudgets();
         }
 
-        public void AddExpense(IExpenseViewModel expense)
+        public async Task AddExpense(IExpenseViewModel expense)
         {
             _expenses.Add(expense);
-            OnPropertyChanged(nameof(Expenses));
+            await UpdateExpenses();
         }
 
-        public void DeleteBudget(IBudgetViewModel budget)
+        public async Task DeleteBudget(IBudgetViewModel budget)
         {
             _budgets.Remove(budget);
-            OnPropertyChanged(nameof(Budgets));
+            await UpdateBudgets();
         }
 
-        public void DeleteExpense(IExpenseViewModel expense)
+        public async Task DeleteExpense(IExpenseViewModel expense)
         {
             _expenses.Add(expense);
+            await UpdateExpenses();
+        }
+
+        private async Task UpdateBudgets()
+        {
+            OnPropertyChanged(nameof(Budgets));
+            await _localStorage.SetItemAsync("budgets", Budgets);
+        }
+
+        private async Task UpdateExpenses()
+        {
             OnPropertyChanged(nameof(Expenses));
+            await _localStorage.SetItemAsync("expenses", Expenses);
         }
     }
 }

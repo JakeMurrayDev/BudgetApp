@@ -1,11 +1,12 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using FluentValidation;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace BudgetApp.Client.ViewModels
 {
     public interface IBudgetViewModel : IViewModel
     {
         Guid Id { get; set; }
-        string Name { get; set; }
+        string? Name { get; set; }
         double Max { get; set; }
     }
 
@@ -13,7 +14,7 @@ namespace BudgetApp.Client.ViewModels
     {
         //Backing Fields
         private Guid _id;
-        private string _name;
+        private string? _name;
         private double _max;
 
         //Properties
@@ -22,7 +23,7 @@ namespace BudgetApp.Client.ViewModels
             get => _id;
             set => SetProperty(ref _id, value, nameof(Id));
         }
-        public string Name
+        public string? Name
         {
             get => _name;
             set => SetProperty(ref _name, value, nameof(Name));
@@ -32,6 +33,16 @@ namespace BudgetApp.Client.ViewModels
             get => _max;
             set => SetProperty(ref _max, value, nameof(Max));
         }
+    }
 
+    public class BudgetValidator : AbstractValidator<IBudgetViewModel>
+    {
+        public BudgetValidator()
+        {
+            RuleFor(x => x.Id).NotEmpty();
+            RuleFor(x => x.Name).NotEmpty();
+            RuleFor(x => x.Max).NotEmpty()
+                .WithMessage("Max must not be and must be greater than zero.");
+        }
     }
 }
