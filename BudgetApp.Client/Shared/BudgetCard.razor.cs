@@ -13,7 +13,7 @@ namespace BudgetApp.Client.Shared
         [Parameter]
         public bool IsGray { get; set; }
         [Parameter]
-        public Func<Task>? OnAddBudgetClick { get; set; }
+        public Func<Task>? OnAddExpenseClick { get; set; }
         [Parameter]
         public Func<Task>? OnViewExpensesClick { get; set; }
 
@@ -44,11 +44,11 @@ namespace BudgetApp.Client.Shared
             }
         }
 
-        private async Task AddBudget()
+        private async Task AddExpense()
         {
-            if (OnAddBudgetClick != null)
+            if (OnAddExpenseClick != null)
             {
-                await OnAddBudgetClick.Invoke();
+                await OnAddExpenseClick.Invoke();
             }
         }
 

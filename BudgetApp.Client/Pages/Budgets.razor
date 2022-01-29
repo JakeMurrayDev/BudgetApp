@@ -24,7 +24,7 @@
                 <BudgetCard Name="@budget.Name"
                             Amount="@BudgetsPageViewModel.GetBudgetExpensesAmount(budget.Id)"
                             Max="@budget.Max"
-                            OnAddBudgetClick="async () => await _addExpenseModal.Show(budget.Id)" />
+                            OnAddExpenseClick="async () => await _addExpenseModal.Show(budget.Id)" />
             }
         </div>
     </div>
