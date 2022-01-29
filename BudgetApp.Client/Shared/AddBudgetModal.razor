@@ -1,5 +1,28 @@
-﻿<h3>AddBudgetModal</h3>
+﻿<Modal @ref="_modal">
+    <ModalHeader>
+        <ModalTitle>New Budget</ModalTitle>
+        <ModalClose />
+    </ModalHeader>
+    <EditForm Model="_budget" OnValidSubmit="AddBudget">
+        <FluentValidationValidator DisableAssemblyScanning="true" />
+        <ModalBody>
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <InputText class="form-control"
+                           @bind-Value="_budget.Name" />
+                <ValidationMessage For="@(() => _budget.Name)" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Max</label>
+                <InputNumber class="form-control"
+                             min="0"
+                             @bind-Value="_budget.Max" />
+                <ValidationMessage For="@(() => _budget.Max)" />
+            </div>
 
-@code {
-
-}
+        </ModalBody>
+        <ModalFooter>
+            <Button type="submit">Add</Button>
+        </ModalFooter>
+    </EditForm>
+</Modal>
