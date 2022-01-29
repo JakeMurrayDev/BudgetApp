@@ -1,4 +1,5 @@
-﻿<Card>
+﻿@using BudgetApp.Client.Enumerations
+<Card Class="@CardBackgroundColor">
     <CardBody>
         <CardTitle Class="d-flex justify-content-between align-items-baseline fw-normal mb-3">
             <div class="me-2">@Name</div>
@@ -13,5 +14,14 @@
                      Min="0"
                      Max="Max"
                      Value="Amount" />
+        <div class="hstack gap-2 mt-4">
+            <Button Variant="ButtonVariant.OutlinePrimary"
+                    Class="ms-auto">
+                Add Expense
+            </Button>
+            <Button Variant="ButtonVariant.OutlineSecondary">
+                View Expense
+            </Button>
+        </div>
     </CardBody>
 </Card>

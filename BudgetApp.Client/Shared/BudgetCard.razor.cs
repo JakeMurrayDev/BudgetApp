@@ -10,21 +10,33 @@ namespace BudgetApp.Client.Shared
         public double Amount { get; set; }
         [Parameter]
         public double Max { get; set; }
+        [Parameter]
+        public bool IsGray { get; set; }
 
-        internal string? Variant
+        private string Variant
         {
             get
             {
                 var ratio = Amount / Max;
-                if (ratio < 0.5)
+                return ratio switch
                 {
-                    return "bg-primary";
-                }
-                else if (ratio < 0.75)
+                    < 0.5 => "bg-primary",
+                    < 0.75 => "bg-warning",
+                    _ => "bg-danger"
+                };
+            }
+        }
+
+        private string? CardBackgroundColor
+        {
+            get
+            {
+                if (Amount > Max)
                 {
-                    return "bg-warning";
+                    return "bg-danger bg-opacity-10";
                 }
-                return "bg-danger";
+
+                return IsGray ? "bg-light" : null;
             }
         }
     }
