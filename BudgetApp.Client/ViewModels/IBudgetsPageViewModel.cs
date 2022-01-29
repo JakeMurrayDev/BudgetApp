@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using Blazored.LocalStorage;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace BudgetApp.Client.ViewModels
 {
@@ -6,7 +7,7 @@ namespace BudgetApp.Client.ViewModels
     {
         List<IBudgetViewModel> Budgets { get; set; }
         List<IExpenseViewModel> Expenses { get; set; }
-        void GetBudgetExpenses(Guid budgetId);
+        double GetBudgetExpensesAmount(Guid budgetId);
         void AddBudget(IBudgetViewModel budget);
         void AddExpense(IExpenseViewModel expense);
         void DeleteBudget(IBudgetViewModel budget);
@@ -15,6 +16,8 @@ namespace BudgetApp.Client.ViewModels
 
     public class BudgetsPageViewModel : ObservableObject, IBudgetsPageViewModel
     {
+        private readonly ILocalStorageService _localStorage;
+
         //Backing Fields
         private List<IBudgetViewModel> _budgets;
         private List<IExpenseViewModel> _expenses;
@@ -31,9 +34,15 @@ namespace BudgetApp.Client.ViewModels
             set => SetProperty(ref _expenses, value, nameof(Expenses));
         }
 
-        public void GetBudgetExpenses(Guid budgetId)
+        public BudgetsPageViewModel(ILocalStorageService localStorage)
         {
-            throw new NotImplementedException();
+            _localStorage = localStorage;
+        }
+
+        public double GetBudgetExpensesAmount(Guid budgetId)
+        {
+            return _expenses.Where(x => x.BudgetId == budgetId)
+                .Sum(x => x.Amount);
         }
 
         public void AddBudget(IBudgetViewModel budget)
