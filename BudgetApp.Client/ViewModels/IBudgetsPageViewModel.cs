@@ -47,22 +47,26 @@ namespace BudgetApp.Client.ViewModels
 
         public void AddBudget(IBudgetViewModel budget)
         {
-            throw new NotImplementedException();
+            _budgets.Add(budget);
+            OnPropertyChanged(nameof(Budgets));
         }
 
         public void AddExpense(IExpenseViewModel expense)
         {
-            throw new NotImplementedException();
+            _expenses.Add(expense);
+            OnPropertyChanged(nameof(Expenses));
         }
 
         public void DeleteBudget(IBudgetViewModel budget)
         {
-            throw new NotImplementedException();
+            _budgets.Remove(budget);
+            OnPropertyChanged(nameof(Budgets));
         }
 
         public void DeleteExpense(IExpenseViewModel expense)
         {
-            throw new NotImplementedException();
+            _expenses.Add(expense);
+            OnPropertyChanged(nameof(Expenses));
         }
     }
 }
