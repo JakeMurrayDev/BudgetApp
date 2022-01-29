@@ -22,17 +22,26 @@ namespace BudgetApp.Client.Shared
             _expense.PropertyChanged += _eventHandler;
         }
 
-        public void Show()
+        public async Task Show(Guid? budgetId = null)
         {
-            _modal.Show();
+            if (budgetId != null)
+            {
+                _expense.BudgetId = (Guid)budgetId;
+            }
+            await _modal.Show();
         }
 
-        private void AddExpense()
+        private async Task AddExpense()
         {
             _expense.Id = Guid.NewGuid();
-            BudgetsPageViewModel.AddExpense(_expense);
+            await BudgetsPageViewModel.AddExpense(_expense);
+            await _modal.Close();
+        }
+
+        private Task ResetViewModel()
+        {
             _expense = new ExpenseViewModel();
-            _modal.Close();
+            return Task.CompletedTask;
         }
 
         public void Dispose()

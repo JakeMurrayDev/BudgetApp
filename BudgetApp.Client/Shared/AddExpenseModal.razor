@@ -1,4 +1,6 @@
-﻿<Modal @ref="_modal">
+﻿@using BudgetApp.Client.ViewModels
+<Modal @ref="_modal"
+       OnClose="ResetViewModel">
     <ModalHeader>
         <ModalTitle>New Expense</ModalTitle>
         <ModalClose />

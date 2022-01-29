@@ -7,11 +7,11 @@
         <div class="hstack gap-2 mb-4">
             <h1 class="me-auto">Budgets</h1>
             <Button Variant="ButtonVariant.Primary"
-                    @onclick="() => _addBudgetModal.Show()">
+                    @onclick="async () => await _addBudgetModal.Show()">
                 Add Budget
             </Button>
             <Button Variant="ButtonVariant.OutlinePrimary"
-                    @onclick="() => _addExpenseModal.Show()">
+                    @onclick="async () => await _addExpenseModal.Show()">
                 Add Expense
             </Button>
         </div>
@@ -23,7 +23,8 @@
             {
                 <BudgetCard Name="@budget.Name"
                             Amount="@BudgetsPageViewModel.GetBudgetExpensesAmount(budget.Id)"
-                            Max="@budget.Max" />
+                            Max="@budget.Max"
+                            OnAddBudgetClick="async () => await _addExpenseModal.Show(budget.Id)" />
             }
         </div>
     </div>

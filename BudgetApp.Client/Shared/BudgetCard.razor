@@ -16,10 +16,12 @@
                      Value="Amount" />
         <div class="hstack gap-2 mt-4">
             <Button Variant="ButtonVariant.OutlinePrimary"
-                    Class="ms-auto">
+                    Class="ms-auto"
+                    @onclick="AddBudget">
                 Add Expense
             </Button>
-            <Button Variant="ButtonVariant.OutlineSecondary">
+            <Button Variant="ButtonVariant.OutlineSecondary"
+                    @onclick="ViewExpenses">
                 View Expenses
             </Button>
         </div>

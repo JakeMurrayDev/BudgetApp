@@ -12,6 +12,10 @@ namespace BudgetApp.Client.Shared
         public double Max { get; set; }
         [Parameter]
         public bool IsGray { get; set; }
+        [Parameter]
+        public Func<Task>? OnAddBudgetClick { get; set; }
+        [Parameter]
+        public Func<Task>? OnViewExpensesClick { get; set; }
 
         private string Variant
         {
@@ -37,6 +41,22 @@ namespace BudgetApp.Client.Shared
                 }
 
                 return IsGray ? "bg-light" : null;
+            }
+        }
+
+        private async Task AddBudget()
+        {
+            if (OnAddBudgetClick != null)
+            {
+                await OnAddBudgetClick.Invoke();
+            }
+        }
+
+        private async Task ViewExpenses()
+        {
+            if (OnViewExpensesClick != null)
+            {
+                await OnViewExpensesClick.Invoke();
             }
         }
     }
