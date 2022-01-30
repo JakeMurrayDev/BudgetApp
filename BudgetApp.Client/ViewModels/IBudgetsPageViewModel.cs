@@ -85,6 +85,7 @@ namespace BudgetApp.Client.ViewModels
         public async Task DeleteBudget(IBudgetViewModel budget)
         {
             _budgets.Remove(budget);
+            _expenses.RemoveAll(x => x.BudgetId == budget.Id);
             await UpdateBudgets();
         }
 

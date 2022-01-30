@@ -24,12 +24,14 @@
                 <BudgetCard Name="@budget.Name"
                             Amount="@BudgetsPageViewModel.GetBudgetExpensesAmount(budget.Id)"
                             Max="@budget.Max"
-                            OnAddExpenseClick="async () => await _addExpenseModal.Show(budget.Id)" />
+                            OnAddExpenseClick="async () => await _addExpenseModal.Show(budget.Id)"
+                            OnViewExpensesClick="async () => await _viewExpensesModal.Show(budget.Id)" />
             }
             <BudgetCard Name="Uncategorized"
                         Amount="@BudgetsPageViewModel.GetBudgetExpensesAmount(Guid.Empty)"
                         IsGray="true"
-                        OnAddExpenseClick="async () => await _addExpenseModal.Show(Guid.Empty)" />
+                        OnAddExpenseClick="async () => await _addExpenseModal.Show(Guid.Empty)"
+                        OnViewExpensesClick="async () => await _viewExpensesModal.Show(Guid.Empty)" />
             <BudgetCard Name="Total"
                         Amount="@BudgetsPageViewModel.GetBudgetExpensesAmount()"
                         Max="@BudgetsPageViewModel.GetBudgetsMax()"
@@ -38,4 +40,5 @@
     </div>
     <AddBudgetModal @ref="_addBudgetModal" />
     <AddExpenseModal @ref="_addExpenseModal" />
+    <ViewExpensesModal @ref="_viewExpensesModal" />
 </CascadingValue>

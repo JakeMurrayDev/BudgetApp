@@ -1,0 +1,34 @@
+﻿@using BudgetApp.Client.Enumerations
+<Modal @ref="_modal">
+    <ModalHeader>
+        <ModalTitle>
+            <div class="hstack gap-2">
+                <span>Expenses - @_budget.Name</span>
+                @if (_budget.Id != Guid.Empty)
+                {
+                    <Button Variant="ButtonVariant.OutlineDanger"
+                            @onclick="async () => await DeleteBudget(_budget)">
+                        Delete
+                    </Button>
+                }
+            </div>
+        </ModalTitle>
+        <ModalClose />
+    </ModalHeader>
+    <ModalBody>
+        <div class="vstack gap-3">
+            @foreach (var expense in BudgetsPageViewModel.Expenses.Where(x => x.BudgetId == _budget.Id))
+            {
+                <div class="hstack gap-2">
+                    <div class="me-auto fs-4">@expense.Description</div>
+                    <div class="fs-5">@expense.Amount.ToString("C")</div>
+                    <Button Variant="ButtonVariant.OutlineDanger"
+                            Class="btn-sm"
+                            @onclick="async () => await BudgetsPageViewModel.DeleteExpense(expense)">
+                        &times;
+                    </Button>
+                </div>
+            }
+        </div>
+    </ModalBody>
+</Modal>
