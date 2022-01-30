@@ -90,7 +90,7 @@ namespace BudgetApp.Client.ViewModels
 
         public async Task DeleteExpense(IExpenseViewModel expense)
         {
-            _expenses.Add(expense);
+            _expenses.Remove(expense);
             await UpdateExpenses();
         }
 
